@@ -1,7 +1,7 @@
 var express = require("express");
 var app = express();
 const fetch = require('node-fetch');
-var mime = require('mime')
+var mime = require('mime-types')
 var port = process.env.PORT || 3000;
 app.use(express.static("public"));
 
@@ -29,8 +29,12 @@ app.get('/te@:url/:user/:repo@:branch/*', (req, res) => {
         res.setHeader(
           'Content-Type', 
           (function() {
+            if (mime.lookup(url)) {
               return mime.lookup(url)
               .replace("application/javascript","text/javascript");
+            } else {
+            return 'text/plain
+            }
           })()
         );
         res.end(body);
@@ -83,10 +87,11 @@ app.get('/:service/:user/:repo@:branch/*', (req, res) => {
         res.setHeader(
           'Content-Type', 
           (function() {
-            if (req.originalUrl.endsWith(".html")) {
-              console.log(req.originalUrl.match(/\/[^\/]+\/[^\/]+\/[^\/]+@[^\/]+\//)[0])
+            if (mime.lookup(url)) {
               return mime.lookup(url)
               .replace("application/javascript","text/javascript");
+            } else {
+            return 'text/plain
             }
           })()
         );
