@@ -33,7 +33,7 @@ app.get('/te@:url/:user/:repo@:branch/*', (req, res) => {
               return mime.lookup(url)
               .replace("application/javascript","text/javascript");
             } else {
-            return 'text/plain
+            return 'text/plain'
             }
           })()
         );
@@ -91,7 +91,7 @@ app.get('/:service/:user/:repo@:branch/*', (req, res) => {
               return mime.lookup(url)
               .replace("application/javascript","text/javascript");
             } else {
-            return 'text/plain
+            return 'text/plain'
             }
           })()
         );
