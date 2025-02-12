@@ -26,17 +26,9 @@ app.get('/te@:url/:user/:repo@:branch/*', (req, res) => {
         // Cache for 1 hour
         res.setHeader('Cache-Control', "max-age=3600");
         // Get correct MIME type, replace old MIME types with new ones
-        res.setHeader(
-          'Content-Type', 
-          (function() {
-            if (mime.lookup(url)) {
-              return mime.lookup(url)
-              .replace("application/javascript","text/javascript");
-            } else {
-            return 'text/javascript'
-            }
-          })()
-        );
+        if (mime.lookup(url)){
+    res.setHeader('Content-Type', mime.lookup(url))
+        }
         res.end(body);
       });
     } else {
@@ -84,17 +76,9 @@ app.get('/:service/:user/:repo@:branch/*', (req, res) => {
         // Cache for 1 hour
         res.setHeader('Cache-Control', "max-age=3600");
         // Get correct MIME type, replace old MIME types with new ones
-        res.setHeader(
-          'Content-Type', 
-          (function() {
-            if (mime.lookup(url)) {
-              return mime.lookup(url)
-              .replace("application/javascript","text/javascript");
-            } else {
-            return 'text/javascript'
-            }
-          })()
-        );
+        if (mime.lookup(url)){
+    res.setHeader('Content-Type', mime.lookup(url))
+        }
         res.end(body);
       });
     } else {
