@@ -41,12 +41,8 @@ app.get('/te@:url/:user/:repo@:branch/*', (req, res) => {
         res.setHeader(
           'Content-Type', 
           (function() {
-            if (req.originalUrl.endsWith(".html")) {
-              return "text/plain";
-            } else {
               return mime.lookup(url)
               .replace("application/javascript","text/javascript");
-            }
           })()
         );
         res.end(body);
@@ -101,12 +97,6 @@ app.get('/:service/:user/:repo@:branch/*', (req, res) => {
           (function() {
             if (req.originalUrl.endsWith(".html")) {
               console.log(req.originalUrl.match(/\/[^\/]+\/[^\/]+\/[^\/]+@[^\/]+\//)[0])
-              if (approvedForHTML.includes(req.originalUrl.match(/\/[^\/]+\/[^\/]+\/[^\/]+@[^\/]+\//)[0])) { 
-                return mime.lookup(url);
-              } else {
-                return "text/plain";
-              }
-            } else {
               return mime.lookup(url)
               .replace("application/javascript","text/javascript");
             }
