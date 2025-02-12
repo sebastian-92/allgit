@@ -1,20 +1,8 @@
 var express = require("express");
 var app = express();
 const fetch = require('node-fetch');
-var MimeLookup = require('mime-lookup');
-var mime = new MimeLookup(require('mime-db'));
-var reqDdos = require('ddos')
-var ddos = new reqDdos({burst:10, limit:15})
-
+var mime = require('mime")
 var port = process.env.PORT || 3000;
-
-const approvedForHTML = [
-  "/gh/3kh0/3kh0-Assets@main/",
-  "/gh/username134567/username134567.github.io@main/"
-];
-
-app.use(ddos.express);
-
 app.use(express.static("public"));
 
 app.listen(port, () => {
